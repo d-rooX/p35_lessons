@@ -48,6 +48,12 @@ class SinglyLinkedList:
             yield current
             current = current.next
 
+    def __len__(self):
+        count = 0
+        for _ in self:
+            count += 1
+        return count
+
 
 sll = SinglyLinkedList()
 sll.append("1")
@@ -64,6 +70,7 @@ sll.insert("INSERTED", 0)
 for i in sll:
     print(i)
 
+print("Len:", len(sll))
 
 
 
