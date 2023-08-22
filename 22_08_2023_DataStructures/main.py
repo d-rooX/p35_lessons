@@ -7,16 +7,16 @@ class Node:
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def append(self, data):
         node = Node(data)
-        if self.head is None:
-            self.head = node
+        if self.tail:
+            self.tail.next = node
+            self.tail = node
         else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = node
+            self.head = node
+            self.tail = node
 
 
 
