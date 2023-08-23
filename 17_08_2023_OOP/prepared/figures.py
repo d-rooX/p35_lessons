@@ -12,7 +12,8 @@ class Circle(Figure):
     def __init__(self, x, y, line_width, radius):
         super().__init__(x, y, line_width)
         self.radius = radius
-        
+
+    @property
     def area(self):
         return 3.14 * (self.radius ** 2)
 
@@ -23,13 +24,19 @@ class Rectangle(Figure):
         self.width = width
         self.height = height
 
+    @property
     def area(self):
         return self.width * self.height
 
 
-figures = [Circle(5), Rectangle(10, 8)]
+# figure = Circle(10, 12, 100, 100)
+# figure.area
 
-for figure in figures:
-    print(f"Figure on ({figure.x}, {figure.y}): {figure.area()}")
-    
+
+# figures = [Circle(5), Rectangle(10, 8)]
+# for figure in figures:
+#     print(f"Figure on ({figure.x}, {figure.y}): {figure.area()}")
+
+
+
     

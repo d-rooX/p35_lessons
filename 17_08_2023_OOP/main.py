@@ -151,44 +151,44 @@
 
 ########### INHERITANCE
 
-# class Figure:
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
+class Figure:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def area(self):
+        return None
+
+
+class Circle(Figure):
+    def __init__(self, x, y, radius):
+        super().__init__(x, y)
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * (self.radius ** 2)
+
+    def circumference(self):
+        return 2 * 3.14 * self.radius
+
+class Rectangle(Figure):
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y)
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
 #
-#     def area(self):
-#         return None
-#
-#
-# class Circle(Figure):
-#     def __init__(self, x, y, radius):
-#         super().__init__(x, y)
-#         self.radius = radius
-#
-#     def area(self):
-#         return 3.14 * (self.radius ** 2)
-#
-#     def circumference(self):
-#         return 2 * 3.14 * self.radius
-#
-# class Rectangle(Figure):
-#     def __init__(self, x, y, width, height):
-#         super().__init__(x, y)
-#         self.width = width
-#         self.height = height
-#
-#     def area(self):
-#         return self.width * self.height
-#
-#     def perimeter(self):
-#         return 2 * (self.width + self.height)
-# #
-# def move_figure(figure, dx, dy):
-#     figure.x += dx
-#     figure.y += dy
-#     print(f"Figure with area {figure.area()} moved on {dx = }, {dy = }")
-#     # f-strings
-#
+def move_figure(figure, dx, dy):
+    figure.x += dx
+    figure.y += dy
+    print(f"Figure with area {figure.area()} moved on {dx = }, {dy = }")
+    # f-strings
+
 #
 # figures = [
 #     Circle(10, 10, 50),
