@@ -74,6 +74,9 @@ class SinglyLinkedList:
         while current:
             if current_index == index:
                 previous.next = current.next
+                if index == self.size - 1:
+                    self.tail = current.n
+                
                 self.size -= 1
                 return current.data
             previous = current
