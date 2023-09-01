@@ -52,7 +52,8 @@ class Episode:
     
     def __str__(self) -> str:
         return f'Episode<{self.title}, {len(self.series)} series>'
-    
+
+
 class Serial:
     def __init__(self, title, episodes):
         self.title = title
@@ -69,22 +70,12 @@ class Stepflix:
         self._watch_queue = Queue()
     
     def next_movie(self):
-        if not self._watch_queue.is_empty:
-            self.currently_watching = self._watch_queue.pop()            
-        else:
-            self.currently_watching = None
-    
-    def add_to_watchlist(self, obj):
-        if isinstance(obj, Movie):
-            self._watch_queue.push(obj)
-        elif isinstance(obj, Episode):
-            for i in obj.series:
-                self._watch_queue.push(i)
-        elif isinstance(obj, Serial):
-            for episode in obj.episodes:
-                for movie in episode.series:
-                    self._watch_queue.push(movie)
-        
+        ...
+
+    def add_to_watchlist(self, obj: Serial | Episode | Movie):
+        ...
+
+
 
 mandalorian = Serial(
     "Mandalorian",
@@ -103,6 +94,12 @@ mandalorian = Serial(
         Episode("Episode 3", series=[
             Movie("New episode"),
         ]),
-        
     ]
 )
+
+stepflix = Stepflix("droox")
+stepflix.add_to_watchlist(mandalorian)
+print(stepflix.currently_watching)
+stepflix.next_movie()
+stepflix.next_movie()
+print(stepflix.currently_watching)
