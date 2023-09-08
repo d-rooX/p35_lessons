@@ -12,11 +12,12 @@ import socket
 
 # TCP/IP
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('127.0.0.1', 1234))
+server.bind(('192.168.0.107', 1234))
 server.listen(2)
 
 print('Waiting for connection...')
 client, client_address = server.accept()
+
 print(f'Client connected! {client_address}')
 client.send(b'Hello, client!')
 # receive

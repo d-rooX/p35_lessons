@@ -2,7 +2,7 @@ import socket
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print('Connecting...')
-client.connect(('127.0.0.1', 1234))
+client.connect(('64.226.112.44', 1235))
 print('Connected!')
 
 print('Getting data from server...')
