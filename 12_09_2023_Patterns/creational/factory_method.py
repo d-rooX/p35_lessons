@@ -11,6 +11,7 @@ class Transport(ABC):
     def deliver(self):
         pass
 
+
 class TransportCreator(ABC):
     @abstractmethod
     def create_transport(self, route, cargo):
@@ -22,17 +23,21 @@ class Ship(Transport):
     def deliver(self):
         print(f"Delivering {self.cargo} to {self.route} using sea route")
 
+
 class Truck(Transport):
     def deliver(self):
         print(f"Delivering {self.cargo} to {self.route} using ground roads")
+
 
 class ShipCreator(TransportCreator):
     def create_transport(self, route, cargo):
         return Ship(route, cargo)
 
+
 class TruckCreator(TransportCreator):
     def create_transport(self, route, cargo):
         return Truck(route, cargo)
+
 
 def get_cargos():
     cargos = ['Iron', 'Cooper', 'Food', 'Building Materials', 'Souvenirs']
@@ -41,6 +46,7 @@ def get_cargos():
 
     for cargo, route, transit_type in zip(cargos, routes, transit_types):
         yield cargo, route, transit_type
+
 
 if __name__ == '__main__':
     transport_creators = {
