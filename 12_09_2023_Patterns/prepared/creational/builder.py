@@ -5,8 +5,8 @@ class House:
         self.doors = None
         self.windows = None
         self.roof = None
-        self.pool = None  # Необязательный параметр
-        self.garden = None  # Необязательный параметр
+        self.pool = None        # Необязательный параметр
+        self.garden = None      # Необязательный параметр
         self.greenhouse = None  # Необязательный параметр
 
 # Абстрактный класс Строителя
@@ -69,11 +69,17 @@ class HouseDirector:
     def __init__(self, builder):
         self.builder = builder
 
-    def construct(self):
+    def build(self, pool=False, garden=False, greenhouse=False):
         self.builder.build_walls()
         self.builder.build_doors()
         self.builder.build_windows()
         self.builder.build_roof()
+        if pool:
+            self.builder.build_pool()
+        if garden:
+            self.builder.build_garden()
+        if greenhouse:
+            self.builder.build_greenhouse()
         # Строитель не обязательно вызывает все методы
         # Можно выбирать, какие параметры добавить
 
@@ -81,8 +87,8 @@ class HouseDirector:
 if __name__ == "__main__":
     builder = ConcreteHouseBuilder()  # Создаем конкретного строителя
     director = HouseDirector(builder)  # Создаем директора
+    director.build(garden=True)                    # Строим дом
 
-    director.construct()  # Строим дом
     house = builder.get_house()  # Получаем готовый дом
 
     print(f"Walls: {house.walls}")
