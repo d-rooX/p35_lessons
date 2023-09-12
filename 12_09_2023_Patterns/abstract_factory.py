@@ -1,58 +1,91 @@
+from abc import ABC, abstractmethod
 
+
+#### ABSTRACT
 class Button:
-    def __init__(self, text) -> None:
+    def __init__(self, text):
         self.text = text
     
-    def render_html(self):
-        return f'<button>{self.text}</button>'
-    
-    def render_windows(self):
-        return f'[Windows]{self.text}[Windows]'
-    
-    def render_linux(self):
-        return f'[Linux]{self.text}[Linux]'
-    
-    def render_macos(self):
-        return f'[MacOS]{self.text}[MacOS]'
-        
+    @abstractmethod
+    def render():
+        pass
 
 class Dialog:
-    def __init__(self, text) -> None:
+    def __init__(self, text):
         self.text = text
     
-    def render_html(self):
-        return f'<button>{self.text}</button>'
-    
-    def render_windows(self):
+    @abstractmethod
+    def render():
+        pass
+
+class GuiFactory(ABC):
+    @abstractmethod
+    def create_button(text) -> Button:
+        pass
+
+    @abstractmethod
+    def create_dialog(text) -> Dialog:
+        pass
+
+
+#### CONCRETE
+class WindowsButton(Button):        
+    def render(self):
         return f'[WindowsButton]{self.text}[WindowsButton]'
-    
-    def render_linux(self):
+
+class LinuxButton(Button):
+    def render(self):
         return f'[LinuxButton]{self.text}[LinuxButton]'
-    
-    def render_macos(self):
-        return f'[MacOSButton]{self.text}[MacOSButton]'
+
+# Another Buttons implementation
+# ...
+
+
+class WindowsDialog(Dialog):
+    def render(self):
+        return f'[WindowsDialog]{self.text}[WindowsDialog]'
         
+class LinuxDialog(Dialog):
+    def render(self):
+        return f'[LinuxDialog]{self.text}[LinuxDialog]'
+
+# Another Dialogs implementation
+# ...
+
+
+## FACTORIES
+class WindowsGuiFactory(GuiFactory):
+    def create_button(self, text) -> Button:
+        return WindowsButton(text)
+
+    def create_dialog(self, text) -> Dialog:
+        return WindowsDialog(text)
+
+class LinuxGuiFactory(GuiFactory):
+    def create_button(self, text) -> Button:
+        return LinuxButton(text)
+
+    def create_dialog(self, text) -> Dialog:
+        return LinuxDialog(text)
 
 
 if __name__ == '__main__':
-    PLATFORM = 'windows'
+    PLATFORM = 'linux'
+    factories = {
+        'windows': WindowsGuiFactory(),
+        'linux': LinuxGuiFactory()
+    }
     
-    dialog = Dialog('Hello!')
-    if PLATFORM == 'windows':
-        dialog.render_windows()
-    elif PLATFORM == 'linux':
-        dialog.render_linux()
-    ...
-    
-    
-    button = Button('OK')
-    if PLATFORM == 'windows':
-        button.render_windows()
-    elif PLATFORM == 'linux':
-        button.render_linux()
-    ...
+    gui_factory: GuiFactory = factories.get(PLATFORM)
+    if not gui_factory:
+        print("Platform is not available")
+        exit()    
     
     
+    dialog = gui_factory.create_dialog("Hello!")
+    print(dialog.render())
     
     
+    button = gui_factory.create_button("Hello!")
+    print(button.render())
     
