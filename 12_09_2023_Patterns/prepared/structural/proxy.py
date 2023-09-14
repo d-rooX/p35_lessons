@@ -28,8 +28,7 @@ class YoutubeAppProxy(YoutubeApp):
 
     def get_video(self, video_id):
         if video_id not in self.cache:
-            video = YoutubeVideo(video_id)
-            video.load()
+            video = super().get_video(video_id)
             self.cache[video_id] = video
         
         return self.cache[video_id]

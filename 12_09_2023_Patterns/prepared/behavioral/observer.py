@@ -2,12 +2,12 @@ from abc import ABC, abstractmethod
 
 
 # Observer interface
-class Observer(ABC):
+class Subscriber(ABC):
     @abstractmethod
     def update(self, event):
         pass
 
-class Observable:
+class Notifier:
     def __init__(self):
         self._observers = []
 
@@ -22,7 +22,7 @@ class Observable:
         self._observers.remove(observer)
 
 # Subject (Observable) class
-class Database(Observable):
+class Database(Notifier):
     def __init__(self, conn_params):
         super().__init__()
         self.conn_params = conn_params
@@ -37,29 +37,29 @@ class Database(Observable):
             return _wrapper
         return __wrapper
 
-    @notify_after('save')
+    # @notify_after('save')
     def save(self, data):
         print("Saving data to the database:", data)
-        # self.notify("on_save", data)
+        self.notify("on_save")
 
-    @notify_after('edit')
+    # @notify_after('edit')
     def edit(self, data):
         print("Editing data in the database:", data)
-        # self.notify("on_edit", data)
+        self.notify("on_edit")
 
-    @notify_after('delete')
+    # @notify_after('delete')
     def delete(self, data):
         print("Deleting data from the database:", data)
-        # self.notify("on_delete", data)
+        self.notify("on_delete")
 
 
 # Concrete Observer classes
-class NotificationService(Observer):
+class NotificationService(Subscriber):
     def update(self, event):
         print(f"Notification Service received event '{event}'")
 
 
-class LoggingService(Observer):
+class LoggingService(Subscriber):
     def update(self, event):
         print(f"Logging Service logged event '{event}'")
 

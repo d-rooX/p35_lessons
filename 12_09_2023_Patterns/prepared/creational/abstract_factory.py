@@ -7,7 +7,7 @@ class Button:
         self.text = text
     
     @abstractmethod
-    def render():
+    def render(self):
         pass
 
 class Dialog:

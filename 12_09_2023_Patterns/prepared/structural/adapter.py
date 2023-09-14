@@ -3,10 +3,12 @@ class LegacyLogger:
     def log_message_to_file(self, message):
         print(f"Legacy Logging: {message}")
 
+
 # Modern logging framework with a different interface
 class ModernLogger:
     def log(self, message):
         print(f"Modern Logging: {message}")
+
 
 # Adapter to make the LegacyLogger compatible with the ModernLogger interface
 class LegacyLoggerAdapter(ModernLogger):
@@ -16,10 +18,12 @@ class LegacyLoggerAdapter(ModernLogger):
     def log(self, message):
         self.legacy_logger.log_message_to_file(message)
 
+
 # Function that logs messages using the ModernLogger interface
 def log_messages(logger, messages):
     for message in messages:
         logger.log(message)
+
 
 # Usage example
 if __name__ == "__main__":

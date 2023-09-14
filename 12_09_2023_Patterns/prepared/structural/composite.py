@@ -6,6 +6,7 @@ class FileSystemComponent:
     def display(self, indent=""):
         pass
 
+
 # Leaf: Represents a file
 class File(FileSystemComponent):
     def __init__(self, name):
@@ -13,6 +14,7 @@ class File(FileSystemComponent):
 
     def display(self, indent=""):
         print(indent + self.name)
+
 
 # Composite: Represents a directory containing files and subdirectories
 class Directory(FileSystemComponent):
@@ -28,6 +30,7 @@ class Directory(FileSystemComponent):
         for child in self.children:
             child.display(indent + "  ")
 
+
 # Usage example
 if __name__ == "__main__":
     # Create files
@@ -35,22 +38,35 @@ if __name__ == "__main__":
     file2 = File("file2.txt")
     file3 = File("photo.jpg")
 
-    # Create directories and add files to them
-    directory1 = Directory("Documents")
-    directory1.add_child(file1)
-    directory1.add_child(file2)
+    d = Directory('files')
+    d.add_child(file1)
+    d.add_child(file2)
+    d.add_child(file3)
 
-    directory2 = Directory("Pictures")
-    directory2.add_child(file3)
+    d1 = Directory('another stuff')
+    d1.add_child(File('some_trash.txt'))
+    d1.add_child(File('pic.jpg'))
 
-    # Create the root directory and add directories to it
-    root_directory = Directory("Root")
-    root_directory.add_child(directory1)
-    root_directory.add_child(directory2)
+    d.add_child(d1)
+    d.display()
 
-    # Display the entire file system hierarchy
-    root_directory.display()
-    print()
-    
-    # Display separate file
-    file1.display()
+
+    # # Create directories and add files to them
+    # directory1 = Directory("Documents")
+    # directory1.add_child(file1)
+    # directory1.add_child(file2)
+    #
+    # directory2 = Directory("Pictures")
+    # directory2.add_child(file3)
+    #
+    # # Create the root directory and add directories to it
+    # root_directory = Directory("Root")
+    # root_directory.add_child(directory1)
+    # root_directory.add_child(directory2)
+    #
+    # # Display the entire file system hierarchy
+    # root_directory.display()
+    # print()
+    #
+    # # Display separate file
+    # file1.display()
